@@ -1,0 +1,152 @@
+/* Doctor Presentation Section Styles */
+.doctor-presentation-section {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin-bottom: 60px; /* Add margin to separate from next section */
+}
+
+.doctor-profile-single {
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr; /* 40/60 split */
+    gap: 40px;
+    align-items: start; /* Align items to the start of the grid area */
+    padding: 40px;
+}
+
+.doctor-image-wrapper {
+    text-align: center;
+}
+
+.doctor-img {
+    width: 100%; /* Make image fill its grid column */
+    max-width: 300px; /* Max width for image */
+    height: auto;
+    border-radius: 10px; /* Slightly rounded corners for a professional look */
+    object-fit: cover;
+    border: 5px solid #007bff; /* Accent border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.doctor-details h1 {
+    font-size: 2.8em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.doctor-details h2 {
+    font-size: 1.8em;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.doctor-details p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.doctor-details h3 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.doctor-details ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.doctor-details ul li {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.doctor-details ul li::before {
+    content: '•';
+    color: #007bff;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .doctor-profile-single {
+        gap: 30px;
+        padding: 30px;
+    }
+    .doctor-details h1 {
+        font-size: 2.5em;
+    }
+    .doctor-details h2 {
+        font-size: 1.6em;
+    }
+    .doctor-details p {
+        font-size: 1em;
+    }
+    .doctor-details h3 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 768px) {
+    .doctor-profile-single {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+        text-align: center;
+        padding: 25px;
+    }
+    .doctor-image-wrapper {
+        margin-bottom: 20px;
+    }
+    .doctor-img {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    .doctor-details h1 {
+        font-size: 2.2em;
+    }
+    .doctor-details h2 {
+        font-size: 1.4em;
+    }
+    .doctor-details p {
+        font-size: 0.95em;
+    }
+    .doctor-details h3 {
+        font-size: 1.2em;
+    }
+    .doctor-details ul {
+        text-align: left;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .doctor-profile-single {
+        padding: 20px;
+    }
+    .doctor-img {
+        max-width: 200px;
+    }
+    .doctor-details h1 {
+        font-size: 1.8em;
+    }
+    .doctor-details h2 {
+        font-size: 1.2em;
+    }
+    .doctor-details p {
+        font-size: 0.9em;
+    }
+    .doctor-details h3 {
+        font-size: 1em;
+    }
+    .doctor-details ul li {
+        font-size: 0.85em;
+    }
+}

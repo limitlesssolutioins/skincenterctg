@@ -1,0 +1,66 @@
+/* ServiciosDermatologicos (Treatments) Page Styles */
+
+.servicios-page {
+    padding-top: 50px; /* Adjust for fixed navbar height */
+}
+
+/* Reusing the page header style from nosotros.css - no new styles needed if global enough */
+/* It's good practice to have shared component styles in a separate file, but for now this works */
+
+.services-list-section .container h2 {
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 2em;
+}
+
+.services-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-list-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-list-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+}
+
+.service-list-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.service-list-card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.service-list-card-content h3 {
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+}
+
+.service-list-card-content p {
+    color: #555;
+    margin-bottom: 1.5em;
+    flex-grow: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .services-list-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}

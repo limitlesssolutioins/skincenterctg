@@ -1,0 +1,180 @@
+﻿.assessment-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.assessment-modal {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 640px;
+  width: 100%;
+  padding: 32px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+}
+
+.assessment-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.assessment-modal__header {
+  margin-bottom: 24px;
+}
+
+.assessment-modal__category {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--accent-color, #0077b6);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.assessment-modal__header h2 {
+  font-size: 1.8rem;
+  margin: 0 0 12px;
+  color: var(--primary-color, #1b365d);
+}
+
+.assessment-modal__service {
+  font-size: 1rem;
+  margin: 0;
+  color: #444;
+}
+
+.assessment-modal__service span {
+  font-weight: 600;
+}
+
+.assessment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.assessment-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.assessment-form__group--split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.assessment-form label,
+.assessment-form legend {
+  font-weight: 600;
+  color: #333;
+}
+
+.assessment-form input[type="text"],
+.assessment-form input[type="email"],
+.assessment-form input[type="tel"],
+.assessment-form select,
+.assessment-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d7dce1;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.assessment-form input:focus,
+.assessment-form select:focus,
+.assessment-form textarea:focus {
+  outline: none;
+  border-color: var(--accent-color, #0077b6);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+}
+
+.assessment-form__group fieldset {
+  border: 1px solid #d7dce1;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.assessment-form__group fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #444;
+}
+
+.assessment-form__group fieldset label + label {
+  margin-top: 8px;
+}
+
+.assessment-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.assessment-form__consent input {
+  margin-top: 4px;
+}
+
+.assessment-modal__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 6px;
+  background: var(--accent-color, #0077b6);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.assessment-modal__button:hover {
+  background: var(--accent-color-dark, #005f8c);
+}
+
+.assessment-modal__success {
+  text-align: center;
+  padding: 24px 0 8px;
+}
+
+.assessment-modal__success h3 {
+  margin-bottom: 12px;
+  color: var(--primary-color, #1b365d);
+}
+
+.assessment-modal__success p {
+  margin-bottom: 24px;
+  color: #444;
+}
+
+@media (max-width: 600px) {
+  .assessment-modal {
+    padding: 24px 20px;
+  }
+
+  .assessment-modal__header h2 {
+    font-size: 1.5rem;
+  }
+}

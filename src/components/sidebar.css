@@ -1,0 +1,84 @@
+/* Sidebar Styles */
+.filters-sidebar {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    align-self: start; /* Stick to the top of the grid container */
+}
+
+.filter-group {
+    margin-bottom: 25px;
+}
+
+.filter-group label {
+    display: block;
+    font-family: var(--font-primary);
+    font-weight: bold;
+    color: var(--neutral-dark);
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.filter-group select,
+.filter-group input[type="range"] {
+    width: 100%;
+}
+
+.filter-group select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: var(--font-primary);
+    font-size: 1em;
+}
+
+/* Price Slider Styles */
+.price-range-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.price-range-inputs span {
+    font-family: var(--font-primary);
+    font-weight: 500;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    background-color: var(--accent-color);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+    background-color: var(--accent-color);
+}

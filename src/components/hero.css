@@ -1,0 +1,199 @@
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-carousel__slide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  height: 100%;
+  /* background-color: #000; Removed dark background */
+}
+
+.hero-carousel__image {
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.hero-carousel__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* opacity: 0.7; Removed opacity for brighter image */
+}
+
+.hero-carousel__text {
+  padding: 3rem; /* Reduced padding */
+  color: #333; /* Darker text for light background */
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent text column from shrinking */
+}
+
+.hero-carousel__text h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Adjusted font size range */
+  margin-bottom: 0.8rem;
+  line-height: 1.1;
+}
+
+.hero-carousel__text h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* Adjusted font size range */
+  margin-bottom: 0.8rem;
+  line-height: 1.2;
+  color: #007bff; /* Highlight color */
+}
+
+.hero-carousel__text p {
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem); /* Adjusted font size range */
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: #555; /* Darker text for light background */
+}
+
+.hero-carousel__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjusted min width */
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Lighter border */
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.05); /* Light background for metrics */
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.metric span {
+  font-size: 0.8rem; /* Reduced font size */
+  color: #777; /* Darker text for light background */
+  margin-bottom: 0.2rem;
+}
+
+.metric strong {
+  font-size: 1.1rem; /* Reduced font size */
+  color: #333; /* Darker text for light background */
+  font-weight: 600;
+}
+
+.hero-carousel__control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.2); /* Darker controls for contrast */
+  color: #fff; /* White icons */
+  border: none;
+  padding: 0.8rem 1rem; /* Reduced padding */
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 1.3rem; /* Reduced font size */
+  transition: background 0.3s ease;
+}
+
+.hero-carousel__control:hover {
+  background: rgba(0, 0, 0, 0.4); /* Darker hover state */
+}
+
+.hero-carousel__control.prev {
+  left: 1.5rem; /* Adjusted position */
+}
+
+.hero-carousel__control.next {
+  right: 1.5rem; /* Adjusted position */
+}
+
+.cta-button {
+  background-color: #007bff; /* Vibrant blue */
+  color: #fff; /* White text */
+  padding: 12px 25px; /* Reduced padding */
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem; /* Reduced font size */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  align-self: flex-start;
+  margin-top: 1.2rem;
+}
+
+.cta-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+  .hero-carousel__slide {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-carousel__image {
+    height: 45vh; /* Adjusted height */
+  }
+
+  .hero-carousel__text {
+    padding: 1.5rem; /* Reduced padding */
+    height: auto;
+  }
+
+  .hero-carousel__text h1 {
+    font-size: 1.8rem; /* Adjusted font size */
+  }
+
+  .hero-carousel__text p {
+    font-size: 0.9rem; /* Adjusted font size */
+  }
+
+  .hero-carousel__metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-carousel__control.prev {
+    left: 0.8rem;
+  }
+
+  .hero-carousel__control.next {
+    right: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: auto;
+  }
+
+  .hero-carousel__image {
+    height: 35vh; /* Adjusted height */
+  }
+
+  .hero-carousel__text {
+    padding: 1rem; /* Reduced padding */
+  }
+
+  .hero-carousel__text h1 {
+    font-size: 1.5rem; /* Adjusted font size */
+  }
+
+  .hero-carousel__text p {
+    font-size: 0.8rem; /* Adjusted font size */
+  }
+
+  .hero-carousel__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-button {
+    width: 100%;
+    text-align: center;
+    align-self: stretch;
+  }
+}

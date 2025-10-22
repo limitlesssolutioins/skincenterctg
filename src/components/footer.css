@@ -1,0 +1,172 @@
+/* Footer Section Styles */
+.footer-section {
+    background-color: var(--neutral-dark); /* Dark blue-gray background */
+    color: var(--neutral-light); /* Light gray text */
+    padding-top: 60px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: var(--font-primary);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+    justify-items: center; /* Center grid items */
+}
+
+.footer-column {
+    /* Add right border for separator */
+    border-right: 1px solid rgba(255, 255, 255, 0.1); /* Light border for separation */
+    padding-right: 20px; /* Add some padding to the right of the border */
+}
+
+.footer-column:last-child {
+    border-right: none; /* Remove border from the last column */
+    padding-right: 0; /* Remove padding from the last column */
+}
+
+.footer-column h3 {
+    font-family: var(--font-secondary);
+    font-size: 1.8em;
+    color: var(--primary-color); /* Primary blue for headings */
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.footer-column p {
+    font-size: 0.95em;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: var(--neutral-light); /* Slightly lighter gray for paragraphs */
+}
+
+.footer-column p svg {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: var(--neutral-light);
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.newsletter-form input {
+    padding: 12px;
+    border: 1px solid var(--neutral-dark);
+    border-radius: 5px;
+    background-color: var(--neutral-dark);
+    color: var(--neutral-light);
+    font-size: 0.95em;
+}
+
+.newsletter-form input::placeholder {
+    color: #95a5a6;
+}
+
+.newsletter-form .btn {
+    padding: 12px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+.footer-column ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 25px;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: var(--neutral-light);
+    font-size: 0.95em;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: var(--primary-color);
+}
+
+.payment-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.payment-icons img {
+    height: 30px; /* Adjust size as needed */
+    width: auto;
+    filter: grayscale(100%); /* Make them blend with the theme */
+    opacity: 0.7;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.payment-icons img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--neutral-dark);
+    padding-top: 20px;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: var(--neutral-light);
+    text-align: center; /* Center the text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack columns on mobile */
+        text-align: center;
+    }
+    .footer-column {
+        margin-bottom: 30px;
+        border-right: none; /* Remove borders when stacked */
+        padding-right: 0;
+    }
+    .social-links, .newsletter-form, .payment-icons {
+        justify-content: center;
+    }
+    .footer-column ul {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section {
+        padding: 40px 15px;
+    }
+    .footer-column h3 {
+        font-size: 1.5em;
+    }
+    .footer-column p, .footer-column ul li a, .newsletter-form input, .newsletter-form .btn {
+        font-size: 0.9em;
+    }
+    .payment-icons img {
+        height: 25px;
+    }
+}

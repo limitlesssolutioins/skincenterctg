@@ -1,0 +1,120 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+    font-family: var(--font-secondary);
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Close Button */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: var(--neutral-dark);
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: var(--font-primary);
+    font-size: 0.95em;
+    color: var(--neutral-dark);
+    font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--neutral-light);
+    border-radius: 5px;
+    font-family: var(--font-primary);
+    font-size: 1em;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+/* Submit Button */
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--accent-color);
+    color: var(--neutral-dark);
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-primary);
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #d4b33d; /* Darker gold */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 20px;
+    }
+    .modal-content h2 {
+        font-size: 1.8em;
+    }
+    .form-group label,
+    .form-group input,
+    .form-group select {
+        font-size: 0.9em;
+    }
+    .submit-button {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+}

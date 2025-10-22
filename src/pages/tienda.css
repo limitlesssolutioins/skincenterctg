@@ -1,0 +1,89 @@
+/* Tienda Page Styles */
+.tienda-page {
+    padding-top: 50px; /* Adjust based on your Navbar height */
+}
+
+.tienda-page .page-header-section {
+    background-color: var(--secondary-color);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.tienda-page .page-header-section h1 {
+    font-family: var(--font-secondary);
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.tienda-page .page-header-section .subtitle {
+    font-family: var(--font-primary);
+    font-size: 1.2em;
+    color: var(--neutral-dark);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.tienda-content-section {
+    padding: 60px 20px;
+}
+
+/* New 2-column layout for filters and products */
+.tienda-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Sidebar width and main content */
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.product-grid-container {
+    width: 100%;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.no-results {
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: 1.2em;
+    color: var(--neutral-dark);
+    grid-column: 1 / -1; /* Span across all columns */
+    padding: 50px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .tienda-layout {
+        grid-template-columns: 1fr; /* Stack sidebar on top of products */
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tienda-page .page-header-section h1 {
+        font-size: 2.5em;
+    }
+    .tienda-page .page-header-section .subtitle {
+        font-size: 1em;
+    }
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .tienda-page .page-header-section h1 {
+        font-size: 2em;
+    }
+    .tienda-content-section {
+        padding: 40px 15px;
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}

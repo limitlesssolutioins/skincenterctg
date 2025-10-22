@@ -1,0 +1,57 @@
+import p1 from '../assets/img/tienda/1.jpeg';
+import p2 from '../assets/img/tienda/2.jpeg';
+import p3 from '../assets/img/tienda/3.jpeg';
+import p4 from '../assets/img/tienda/4.jpeg';
+import p5 from '../assets/img/tienda/5.jpeg';
+import p6 from '../assets/img/tienda/6.jpeg';
+import p7 from '../assets/img/tienda/7.jpeg';
+import p8 from '../assets/img/tienda/8.jpeg';
+import p9 from '../assets/img/tienda/9.jpeg';
+import p10 from '../assets/img/tienda/10.jpeg';
+import p11 from '../assets/img/tienda/11.jpeg';
+import p12 from '../assets/img/tienda/12.jpeg';
+import p13 from '../assets/img/tienda/13.jpeg';
+import p14 from '../assets/img/tienda/14.jpeg';
+import p15 from '../assets/img/tienda/15.jpeg';
+import p16 from '../assets/img/tienda/16.jpeg';
+import p17 from '../assets/img/tienda/17.jpeg';
+import p18 from '../assets/img/tienda/18.jpeg';
+import p19 from '../assets/img/tienda/19.jpeg';
+import p20 from '../assets/img/tienda/20.jpeg';
+import p21 from '../assets/img/tienda/21.jpeg';
+import p22 from '../assets/img/tienda/22.jpeg';
+import p23 from '../assets/img/tienda/23.jpeg';
+import p24 from '../assets/img/tienda/24.jpeg';
+import p25 from '../assets/img/tienda/25.jpeg';
+import p26 from '../assets/img/tienda/26.jpeg';
+import p27 from '../assets/img/tienda/27.jpeg';
+import p28 from '../assets/img/tienda/28.jpeg';
+import p29 from '../assets/img/tienda/29.jpeg';
+import p30 from '../assets/img/tienda/30.jpeg';
+import p31 from '../assets/img/tienda/31.jpeg';
+import p32 from '../assets/img/tienda/32.jpeg';
+import p33 from '../assets/img/tienda/33.jpeg';
+import p34 from '../assets/img/tienda/34.jpeg';
+import p35 from '../assets/img/tienda/35.jpeg';
+import p36 from '../assets/img/tienda/36.jpeg';
+import p37 from '../assets/img/tienda/37.jpeg';
+import p38 from '../assets/img/tienda/38.jpeg';
+import p39 from '../assets/img/tienda/39.jpeg';
+import p41 from '../assets/img/tienda/41.jpeg';
+
+const images = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p41];
+
+const brands = ['Dermatologica', 'Skincare Pro', 'SunGuard', 'NatureDerma', 'Glow Up'];
+const lines = ['Hidratación', 'Protección Solar', 'Limpieza', 'Anti-edad', 'Tratamientos Específicos', 'Antioxidantes'];
+
+export const allProducts = images.map((image, index) => {
+  const productId = index + 1;
+  return {
+    id: productId,
+    name: `Producto de Cuidado Facial ${productId}`,
+    brand: brands[productId % brands.length],
+    line: lines[productId % lines.length],
+    price: parseFloat((Math.random() * (80 - 20) + 20).toFixed(2)),
+    image: image,
+  };
+});

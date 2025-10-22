@@ -1,0 +1,123 @@
+/* Antes y Después Section Styles */
+.antes-despues-section {
+    text-align: center;
+    padding: 0 20px 40px; /* CHANGED: Removed top padding */
+    background-color: #f9f9f9;
+}
+
+.grid-container {
+    display: grid; /* REVERTED: Use grid */
+    grid-auto-flow: column; /* CHANGED: Create a column-based grid */
+    grid-auto-columns: 1fr; /* CHANGED: Make columns equal width */
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    overflow: hidden; /* ADDED: Prevent overflow */
+}
+
+.before-after-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer; /* Indicates the card is clickable */
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%; /* Full width */
+    height: 100%; /* Make wrapper take full height */
+    overflow: hidden;
+}
+
+.grid-container .image-wrapper {
+    padding-bottom: 100%; /* Square aspect ratio for grid */
+    height: auto; /* Reset height for grid */
+}
+
+.image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.before-after-card:hover .image-wrapper img {
+    transform: scale(1.05);
+}
+
+/* --- Overlay Styles --- */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(30, 41, 59, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 15px;
+}
+
+.before-after-card:hover .overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.before-after-card:hover .overlay-text {
+    transform: translateY(0);
+}
+
+
+/* Remove label styles as they are no longer used */
+.label {
+    display: none;
+}
+
+/* Remove vertical separator */
+.before-after-card::after {
+    display: none;
+}
+
+/* Slick Carousel Customizations */
+.carousel-container-slick .before-after-card {
+    margin: 0 10px; /* Add some horizontal spacing between slides */
+}
+
+.carousel-container-slick .image-wrapper {
+    height: 300px; /* Fixed height for carousel images */
+    width: 100%;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .grid-container {
+        display: none; /* Hide grid on mobile */
+    }
+    .carousel-container-slick {
+        display: block; /* Show slick carousel on mobile */
+    }
+}
+
+@media (min-width: 769px) {
+    .carousel-container-slick {
+        display: none; /* Hide slick carousel on desktop */
+    }
+}

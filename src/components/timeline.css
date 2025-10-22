@@ -1,0 +1,115 @@
+/* Timeline.css */
+.timeline-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--primary-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    z-index: 1;
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 40px 0;
+    width: 100%;
+    opacity: 0;
+    animation: fade-in 0.8s ease-out forwards;
+    animation-delay: calc(0.5s * var(--i));
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.timeline-content, .timeline-image-wrapper {
+    flex-basis: calc(50% - 40px);
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-content {
+    padding: 25px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.timeline-content h3 {
+    font-family: var(--font-secondary);
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.timeline-content p {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+.timeline-image {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: block;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 4px solid var(--primary-color);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .timeline-container::after {
+        left: 20px;
+    }
+
+    .timeline-item, .timeline-item:nth-child(even) {
+        flex-direction: column;
+    }
+
+    .timeline-content, .timeline-image-wrapper {
+        flex-basis: 100%;
+        width: 100%;
+        padding-left: 40px;
+    }
+
+    .timeline-image-wrapper {
+        margin-top: 20px;
+    }
+
+    .timeline-item::after {
+        left: 10px;
+    }
+
+    .timeline-content {
+        text-align: left;
+    }
+}

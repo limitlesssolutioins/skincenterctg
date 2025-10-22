@@ -1,0 +1,116 @@
+/* ProductCard Styles */
+.product-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Needed for overlay positioning */
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Image container for zoom effect and overlay */
+.product-image-container {
+    position: relative;
+    overflow: hidden; /* Clips the zoom effect */
+}
+
+.product-image {
+    width: 100%;
+    height: 250px; /* Increased height for better visuals */
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.1); /* Zoom effect */
+}
+
+/* Overlay for actions */
+.product-actions-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.product-card:hover .product-actions-overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.quick-view-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: 1em;
+    font-weight: 600;
+    transform: translateY(20px); /* Start slightly lower */
+    transition: background-color 0.3s ease, transform 0.4s ease;
+}
+
+.product-card:hover .quick-view-btn {
+    transform: translateY(0); /* Slide up on hover */
+}
+
+.quick-view-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--neutral-dark);
+}
+
+/* Product Info (remains visible below) */
+.product-info {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.product-name {
+    font-family: var(--font-secondary);
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.product-brand {
+    font-family: var(--font-primary);
+    font-size: 0.9em;
+    color: var(--neutral-dark);
+    margin-bottom: 12px;
+}
+
+.product-price {
+    font-family: var(--font-secondary);
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.product-discount-price {
+    font-family: var(--font-secondary);
+    font-size: 1.2em;
+    color: var(--neutral-dark);
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 8px;
+}

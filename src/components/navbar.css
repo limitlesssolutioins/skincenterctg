@@ -1,0 +1,217 @@
+/* Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+}
+
+.navbar.scrolled {
+    background-color: #fff;
+    padding: 10px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.navbar-logo-icon {
+    height: 45px;
+    transition: height 0.4s ease;
+}
+
+.navbar-logo-text {
+    height: 20px;
+    transition: height 0.4s ease;
+}
+
+.navbar.scrolled .navbar-logo-icon {
+    height: 35px;
+}
+
+.navbar.scrolled .navbar-logo-text {
+    height: 16px;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    font-family: var(--font-primary);
+    color: var(--neutral-dark);
+    font-size: 1em;
+    font-weight: 500;
+    text-decoration: none;
+    padding-bottom: 5px;
+    position: relative;
+    transition: color 0.4s ease;
+}
+
+.navbar.scrolled .nav-link {
+    color: var(--neutral-dark);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--neutral-dark);
+}
+
+.navbar.scrolled .language-selector {
+    color: var(--neutral-dark);
+}
+
+.language-selector select {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--neutral-dark);
+    border: 1px solid var(--neutral-dark);
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.navbar.scrolled .language-selector select {
+    background-color: #fff;
+    color: var(--neutral-dark);
+    border-color: var(--neutral-dark);
+}
+
+.language-selector option {
+    background-color: var(--neutral-dark);
+    color: #fff;
+}
+
+/* CTA Button Styling */
+.nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--accent-color);
+    color: var(--neutral-dark);
+    border: 1px solid var(--accent-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-cta:hover {
+    background-color: #d4b33d; /* Darker gold */
+    border-color: #d4b33d; /* Darker gold */
+    transform: translateY(-2px);
+}
+
+/* Scrolled State */
+.navbar.scrolled .nav-cta {
+    background-color: var(--accent-color);
+    color: var(--neutral-dark);
+    border-color: var(--accent-color);
+}
+
+.navbar.scrolled .nav-cta:hover {
+    background-color: #d4b33d; /* Darker shade of gold */
+    border-color: #d4b33d;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .navbar-nav {
+        display: none; /* Hide nav links */
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .navbar.scrolled {
+        padding: 10px 20px;
+    }
+
+    .navbar-actions .language-selector {
+        display: none; /* Hide language selector on smaller screens */
+    }
+}
+
+/* Dropdown Styles */
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    min-width: 160px;
+    z-index: 1001;
+}
+
+.dropdown-item {
+    color: #333;
+    padding: 8px 15px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.navbar.scrolled .dropdown-item {
+    color: var(--neutral-dark);
+}
+
+.dropdown-item::after {
+    content: none;
+}

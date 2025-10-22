@@ -1,0 +1,363 @@
+/* Nosotros (About Us) Page Styles */
+
+/* Dummy comment to force re-compilation. */
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes blob-animation {
+    0% {
+        transform: scale(1) translate(0, 0);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    25% {
+        transform: scale(1.1) translate(20px, -10px);
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    50% {
+        transform: scale(0.9) translate(-10px, 20px);
+        border-radius: 70% 30% 60% 40% / 40% 70% 60% 30%;
+    }
+    75% {
+        transform: scale(1.2) translate(10px, 10px);
+        border-radius: 40% 70% 30% 60% / 70% 40% 60% 50%;
+    }
+    100% {
+        transform: scale(1) translate(0, 0);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+}
+
+.nosotros-page {
+    padding-top: 50px; /* Adjust for fixed navbar height */
+}
+
+/* Page Header Section */
+.page-header-section {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('/img/Banner_services_dermaestetic.jpg');
+    background-size: 200% 100%; /* Make the gradient wider than the element */
+    background-position: center;
+    padding: 100px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--neutral-light);
+    position: relative;
+    animation: gradientShift 15s ease infinite alternate; /* Apply the animation */
+}
+
+.page-header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+    z-index: 1;
+}
+
+.page-header-section::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: rgba(91, 192, 235, 0.1); /* Use a subtle color based on primary */
+    filter: blur(80px); /* Soften the edges */
+    z-index: 0; /* Behind the content and overlay */
+    animation: blob-animation 25s infinite alternate ease-in-out;
+}
+
+.page-header-section .subtitle {
+    font-family: var(--font-secondary);
+    font-size: 2.5em;
+    color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.page-header-section .author {
+    font-family: var(--font-primary);
+    font-size: 1.2em;
+    color: #fff;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.section-title {
+    font-family: var(--font-secondary);
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 1.5em;
+}
+
+/* Doctor Profile Section */
+.doctor-profile-section {
+    background-color: var(--neutral-light);
+}
+
+.doctor-profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.doctor-profile-image {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.doctor-text-content h2 {
+    font-family: var(--font-secondary);
+    font-size: 2.2em;
+    margin-bottom: 0.5em;
+    color: var(--primary-color);
+}
+
+.doctor-text-content p {
+    font-family: var(--font-primary);
+    line-height: 1.7;
+    color: var(--neutral-dark);
+    margin-bottom: 1em;
+}
+
+/* Values Section */
+.values-section-nosotros {
+    background-color: var(--secondary-color);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.value-item {
+    text-align: center;
+}
+
+.value-item h4 {
+    font-family: var(--font-secondary);
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+    color: var(--primary-color);
+}
+
+.value-item p {
+    font-family: var(--font-primary);
+    font-size: 1em;
+    color: var(--neutral-dark);
+    line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .doctor-profile-grid,
+    .mision-vision-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-image-content {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header-section h1 {
+        font-size: 2.2em;
+    }
+    .page-header-section .subtitle {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header-section h1 {
+        font-size: 1.8em;
+    }
+    .page-header-section .subtitle {
+        font-size: 1em;
+    }
+}
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-header-section .subtitle.animated-text {
+    opacity: 0; /* Start hidden */
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.5s; /* Delay for the quote */
+}
+
+.page-header-section .author.animated-author {
+    opacity: 0; /* Start hidden */
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 1s; /* Delay for the author, after the quote */
+}
+.page-header-section {
+  position: relative;
+  background: radial-gradient(circle at top, rgba(18, 38, 63, 0.88), rgba(9, 19, 36, 0.95));
+  color: #fff;
+  overflow: hidden;
+  padding: 120px 0 100px;
+}
+
+.page-header-section .container {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+}
+
+.subtitle.animated-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1.5;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  position: relative;
+}
+
+.subtitle.animated-text::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'%3E%3Cpath fill='white' d='M0 80Q65 100 130 90t130 0q65-13 130-6t130 6q65 1 130-12t130-1q65 13 130 32t130 19q65 0 130-16t130-13v147H0Z'/%3E%3C/svg%3E") center/cover;
+  animation: shimmer 6s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.author.animated-author {
+  margin-top: 24px;
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.author.animated-author::before {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  margin-right: 24px;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(30%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.handwriting-mask {
+  position: relative;
+  overflow: hidden;
+}
+
+.handwriting-mask svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.handwriting-path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: handwriting 5.5s ease forwards;
+}
+
+@keyframes handwriting {
+  0% {
+    stroke-dashoffset: 2400;
+  }
+  80% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+.particle-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 214, 171, 0.8);
+  box-shadow: 0 0 12px rgba(255, 214, 171, 0.8);
+  animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(100%) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120%) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header-section {
+    padding: 100px 0 80px;
+  }
+
+  .subtitle.animated-text {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  .author.animated-author {
+    letter-spacing: 0.2em;
+  }
+}
