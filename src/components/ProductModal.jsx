@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './productmodal.css';
+import { useCart } from '../context/CartContext'; // Import useCart
 
 const ProductModal = ({ product, isOpen, onClose }) => {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart(); // Use the addToCart function
 
   useEffect(() => {
     if (isOpen) {
@@ -26,6 +28,14 @@ const ProductModal = ({ product, isOpen, onClose }) => {
     setQuantity(prev => Math.max(1, prev + amount));
   };
 
+  const handleAddToCart = () => {
+    // Add the product to the cart with the selected quantity
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    onClose(); // Close the modal after adding to cart
+  };
+
   return (
     <div className={`modal-backdrop ${isOpen ? 'open' : ''}`} onClick={onClose}>
       <div className="product-modal" onClick={(e) => e.stopPropagation()}>
@@ -36,9 +46,8 @@ const ProductModal = ({ product, isOpen, onClose }) => {
         </div>
 
         <div className="modal-info-container">
-          <p className="modal-product-brand">{product.brand}</p>
           <h2 className="modal-product-name">{product.name}</h2>
-          <p className="modal-product-price">${product.price.toFixed(2)}</p>
+          <p className="modal-product-brand">{product.brand}</p>
           
           <p className="modal-product-description">
             {/* Using a placeholder description for now */}
@@ -52,7 +61,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
             <button className="quantity-btn" onClick={() => handleQuantityChange(1)}>+</button>
           </div>
 
-          <button className="modal-add-to-cart-btn">Añadir al Carrito</button>
+          <button className="modal-add-to-cart-btn" onClick={handleAddToCart}>Añadir al Carrito</button>
         </div>
       </div>
     </div>

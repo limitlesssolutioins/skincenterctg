@@ -1,5 +1,5 @@
-﻿import React, { useState } from 'react';
-import QuickAssessmentModal from '../components/QuickAssessmentModal';
+﻿import React from 'react';
+import { useOutletContext } from 'react-router-dom';
 import SpaExperienceShowcase from '../components/SpaExperienceShowcase';
 import './spa.css';
 
@@ -106,17 +106,10 @@ const facialExperiences = [
 ];
 
 function SpaFacial() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedExperience, setSelectedExperience] = useState('');
+  const { openModal } = useOutletContext();
 
   const handleOpenAssessment = (experienceTitle) => {
-    setSelectedExperience(experienceTitle);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedExperience('');
+    openModal(experienceTitle, "Spa Facial");
   };
 
   return (
@@ -136,13 +129,6 @@ function SpaFacial() {
           onOpenAssessment={handleOpenAssessment}
         />
       </div>
-
-      <QuickAssessmentModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        serviceName={selectedExperience}
-        category="Spa Facial"
-      />
     </section>
   );
 }

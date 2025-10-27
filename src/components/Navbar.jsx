@@ -1,15 +1,16 @@
-﻿import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import './navbar.css';
-import { FaCalendarAlt, FaGlobe } from 'react-icons/fa';
+import { FaCalendarAlt, FaGlobe, FaBars, FaTimes } from 'react-icons/fa';
 import logoIcon from '../assets/img/icon.png';
 import logoText from '../assets/img/justxt.png';
 
 function Navbar({ openModal }) {
   const [scrolled, setScrolled] = useState(false);
-  const [tiendaDropdownOpen, setTiendaDropdownOpen] = useState(false);
   const [dermatologiaDropdownOpen, setDermatologiaDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,51 +31,55 @@ function Navbar({ openModal }) {
     };
   }, [scrolled, location.pathname]);
 
+  const handleContactClick = () => {
+    navigate('/');
+    setTimeout(() => {
+      const footer = document.getElementById('contacto');
+      if (footer) {
+        footer.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+    setMobileMenuOpen(false);
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-left">
         <div className="navbar-brand">
-          <NavLink to="/">
+          <NavLink to="/" className="navbar-brand-link">
             <div className="logo-container">
-              <img src={logoIcon} alt="Clinica Icon" className="navbar-logo-icon" />
-              <img src={logoText} alt="Clinica Dermatologica" className="navbar-logo-text" />
+              <img src={logoIcon} alt="Clínica Icon" className="navbar-logo-icon" />
+              <img src={logoText} alt="Clínica Dermatológica" className="navbar-logo-text" />
             </div>
           </NavLink>
         </div>
-        <nav className="navbar-nav">
-          <NavLink to="/nosotros" className="nav-link">Nosotros</NavLink>
-          <div
-            className="dropdown-container"
-            onMouseEnter={() => setDermatologiaDropdownOpen(true)}
-            onMouseLeave={() => setDermatologiaDropdownOpen(false)}
-          >
-            <span className="nav-link">Dermatologia</span>
-            {dermatologiaDropdownOpen && (
-              <div className="dropdown-menu">
-                <NavLink to="/dermatologia/clinica" className="dropdown-item">Clinica</NavLink>
-                <NavLink to="/dermatologia/estetica" className="dropdown-item">Estetica</NavLink>
-              </div>
-            )}
-          </div>
-          <NavLink to="/spa" className="nav-link">Spa</NavLink>
-          <div
-            className="dropdown-container"
-            onMouseEnter={() => setTiendaDropdownOpen(true)}
-            onMouseLeave={() => setTiendaDropdownOpen(false)}
-          >
-            <NavLink to="/tienda" className="nav-link">Tienda</NavLink>
-            {tiendaDropdownOpen && (
-              <div className="dropdown-menu">
-                <NavLink to="/tienda/rejuvenecimiento" className="dropdown-item">Rejuvenecimiento</NavLink>
-                <NavLink to="/tienda/capilar" className="dropdown-item">Capilar</NavLink>
-                <NavLink to="/tienda/anti-acne" className="dropdown-item">Anti Acne</NavLink>
-                <NavLink to="/tienda/antimanchas" className="dropdown-item">Antimanchas</NavLink>
-              </div>
-            )}
-          </div>
-          <NavLink to="/blog" className="nav-link">Blog</NavLink>
-          <NavLink to="/contacto" className="nav-link">Contacto</NavLink>
-        </nav>
+      </div>
+      <nav className={`navbar-nav ${mobileMenuOpen ? 'active' : ''}`}>
+        <NavLink to="/nosotros" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Nosotros</NavLink>
+        <div
+          className="dropdown-container"
+          onMouseEnter={() => setDermatologiaDropdownOpen(true)}
+          onMouseLeave={() => setDermatologiaDropdownOpen(false)}
+        >
+          <span className="nav-link">Dermatología</span>
+          {dermatologiaDropdownOpen && (
+            <div className="dropdown-menu">
+              <NavLink to="/dermatologia/clinica" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Clínica</NavLink>
+              <NavLink to="/dermatologia/estetica" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>Estética</NavLink>
+            </div>
+          )}
+        </div>
+        <NavLink to="/spa" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Spa</NavLink>
+        <NavLink to="/tienda" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Tienda</NavLink>
+        <NavLink to="/blog" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Blog</NavLink>
+        <span className="nav-link" onClick={handleContactClick} style={{cursor: 'pointer'}}>Contacto</span>
+      </nav>
+      <div className="hamburger-menu" onClick={toggleMobileMenu}>
+        {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </div>
       <div className="navbar-actions">
         <div className="language-selector">
@@ -84,7 +89,7 @@ function Navbar({ openModal }) {
             <option value="en">EN</option>
           </select>
         </div>
-        <button className="nav-cta" onClick={openModal}>
+        <button className="nav-cta" onClick={() => { openModal(); setMobileMenuOpen(false); }}>
           <FaCalendarAlt size={16} /> Agendar Cita
         </button>
       </div>

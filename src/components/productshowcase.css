@@ -1,6 +1,7 @@
 .product-showcase-section {
   padding: 4rem 0;
-  background-color: var(--secondary-color);
+  background-color: var(--neutral-light);
+  overflow-x: hidden;
 }
 
 .product-showcase-title {
@@ -11,10 +12,9 @@
   color: var(--neutral-dark);
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+/* Estilos para las tarjetas de productos dentro del carrusel */
+.product-card-wrapper {
+  padding: 0 15px; /* Espacio entre las tarjetas en el carrusel */
 }
 
 .product-card {
@@ -24,6 +24,10 @@
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease;
+  max-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-card:hover {
@@ -48,6 +52,9 @@
   padding: 0 1rem;
   margin-bottom: 1.5rem;
   color: var(--neutral-dark);
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .whatsapp-button {
@@ -64,4 +71,49 @@
 
 .whatsapp-button:hover {
   background-color: #128c7e;
+}
+
+/* Estilos para los puntos (dots) del carrusel */
+.slick-dots {
+  bottom: -30px; /* Ajusta la posición de los puntos */
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: var(--primary-color); /* Color de los puntos */
+}
+
+.slick-dots li.slick-active button:before {
+  color: var(--accent-color); /* Color del punto activo */
+}
+
+/* Estilos para las flechas de navegación */
+.slick-prev:before, .slick-next:before {
+  color: var(--primary-color); /* Color de las flechas */
+  font-size: 30px;
+}
+
+.slick-prev {
+  left: -25px; /* Ajusta la posición de la flecha izquierda */
+  z-index: 1;
+}
+
+.slick-next {
+  right: -25px; /* Ajusta la posición de la flecha derecha */
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .slick-prev, .slick-next {
+    font-size: 20px;
+  }
+  .slick-prev {
+    left: 0px;
+  }
+  .slick-next {
+    right: 0px;
+  }
+  .product-card-wrapper {
+    padding: 0 5px;
+  }
 }

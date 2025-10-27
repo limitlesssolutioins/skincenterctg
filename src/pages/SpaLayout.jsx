@@ -3,13 +3,13 @@ import { NavLink, Outlet } from 'react-router-dom';
 import './spa.css';
 
 const spaSections = [
-  { path: 'facial', label: 'Facial', tagline: 'Glow inmediato y renovacion profunda' },
-  { path: 'capilar', label: 'Capilar', tagline: 'Fortalecimiento y regeneracion del cuero cabelludo' },
-  { path: 'corporal', label: 'Corporal', tagline: 'Moldeamiento, tonificacion y bienestar integral' },
-  { path: 'laser', label: 'Laser', tagline: 'Tecnologia de alta precision para resultados visibles' },
+  { path: 'facial', label: 'Facial', tagline: 'Glow inmediato y renovación profunda' },
+  { path: 'capilar', label: 'Capilar', tagline: 'Fortalecimiento y regeneración del cuero cabelludo' },
+  { path: 'corporal', label: 'Corporal', tagline: 'Moldeamiento, tonificación y bienestar integral' },
+  { path: 'laser', label: 'Laser', tagline: 'Tecnología de alta precisión para resultados visibles' },
 ];
 
-const SpaLayout = () => {
+const SpaLayout = ({ openModal }) => {
   useEffect(() => {
     const body = document.body;
     const updateOffset = () => {
@@ -38,11 +38,11 @@ const SpaLayout = () => {
         </div>
         <div className="spa-hero__overlay" />
         <div className="spa-hero__content container">
-          <p className="spa-hero__kicker">Spa Dermatologico</p>
+          <p className="spa-hero__kicker">Spa Dermatológico</p>
           <h1>Experiencias inmersivas para transformar tu piel</h1>
           <p className="spa-hero__lead">
-            Protocolos sensoriales creados por especialistas dermatologicos que combinan aparatologia de ultima generacion,
-            formulas exclusivas y tecnicas manuales para un cuidado integral.
+            Protocolos sensoriales creados por especialistas dermatológicos que combinan aparatología de última generacion,
+            formulas exclusivas y técnicas manuales para un cuidado integral.
           </p>
           <div className="spa-hero__actions" role="tablist">
             {spaSections.map((section) => (
@@ -69,14 +69,13 @@ const SpaLayout = () => {
               end
             >
               <span className="spa-nav__label">{section.label}</span>
-              <span className="spa-nav__tagline">{section.tagline}</span>
             </NavLink>
           ))}
         </div>
       </nav>
 
       <div className="spa-outlet">
-        <Outlet />
+        <Outlet context={{ openModal }} />
       </div>
     </div>
   );

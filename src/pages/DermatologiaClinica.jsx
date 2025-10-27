@@ -1,5 +1,4 @@
-﻿import React, { useState } from 'react';
-import QuickAssessmentModal from '../components/QuickAssessmentModal';
+import React from 'react';
 import './dermatologia.css';
 
 const tratamientosMedicosData = [
@@ -18,7 +17,7 @@ const tratamientosMedicosData = [
   {
     id: 3,
     title: 'Reseccion de Lesiones Cutaneas',
-    description: 'Extirpacion quirurgica de lesiones benignas o malignas con tecnicas precisas para resultados funcionales y esteticos.',
+    description: 'Extirpacion quirurgica de lesiones benignas o malignas con tecnicas precisas, según el tipo y localización de la lesión, obteniendo resultados funcionales y esteticos.',
     image: '/img/lesionescutaneas.png',
   },
   {
@@ -53,8 +52,8 @@ const tecnologiaClinica = [
   },
 ];
 
-const ServiceBlock = ({ service, isReversed, onLearnMore }) => (
-  <div className={'service-block' + (isReversed ? ' service-block--reverse' : '')}>
+const ServiceBlock = ({ service, onLearnMore }) => (
+  <div className="service-block">
     <div className="service-image-container">
       <img src={service.image} alt={service.title} className="service-image" />
     </div>
@@ -64,6 +63,9 @@ const ServiceBlock = ({ service, isReversed, onLearnMore }) => (
       <button type="button" className="learn-more-button" onClick={() => onLearnMore(service.title)}>
         Saber mas
       </button>
+    </div>
+    <div className="service-image-container">
+      <img src={service.image} alt={service.title} className="service-image" />
     </div>
   </div>
 );
@@ -75,18 +77,9 @@ const TechnologyCard = ({ item }) => (
   </div>
 );
 
-function DermatologiaClinica() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState('');
-
+function DermatologiaClinica({ openModal }) {
   const handleOpenModal = (serviceTitle) => {
-    setSelectedService(serviceTitle);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedService('');
+    openModal(serviceTitle, "Dermatologia Clinica");
   };
 
   return (
@@ -104,7 +97,6 @@ function DermatologiaClinica() {
             <ServiceBlock
               key={service.id}
               service={service}
-              isReversed={index % 2 !== 0}
               onLearnMore={handleOpenModal}
             />
           ))}
@@ -121,13 +113,6 @@ function DermatologiaClinica() {
           </div>
         </div>
       </section>
-
-      <QuickAssessmentModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        serviceName={selectedService}
-        category="Dermatologia Clinica"
-      />
     </div>
   );
 }

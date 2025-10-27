@@ -1,0 +1,85 @@
+Guia detallada para desplegar el backend del chatbot en PythonAnywhere
+====================================================================
+
+1. Preparacion local
+   a. Verifica que el proyecto este actualizado en tu repositorio.
+   b. Confirma que src/components/chatbot/.env.example contiene los valores placeholder y que NO hay credenciales reales en el repositorio.
+   c. Crea un archivo .zip o prepara un push a Git con la version que quieras subir.
+
+2. Subir el codigo a PythonAnywhere
+   a. Ingresa a https://www.pythonanywhere.com/ e inicia sesion.
+   b. Desde la pesta�a **Files**, crea la carpeta /home/<usuario>/Dermatologico (ajusta <usuario> por tu nombre de cuenta).
+   c. Sube el .zip y descompr�melo dentro de esa carpeta o clona tu repositorio con git clone.
+   d. Confirma que lask_app.py, 
+equirements.txt y la carpeta src/components/chatbot esten presentes en el servidor.
+
+3. Crear el entorno virtual
+   a. Abre una consola **Bash** desde PythonAnywhere.
+   b. Ejecuta: python3.11 -m venv ~/.virtualenvs/skincenter
+   c. Activa el entorno: source ~/.virtualenvs/skincenter/bin/activate
+   d. Actualiza pip (opcional pero recomendado): pip install --upgrade pip
+
+4. Instalar dependencias
+   a. Con el entorno activado, instala los paquetes: pip install -r /home/<usuario>/Dermatologico/src/components/chatbot/requirements.txt
+   b. Si mas adelante agregas nuevas librerias, vuelve a ejecutar el comando.
+
+5. Configurar variables de entorno
+   Opcion 1 (panel Web recomendado):
+     - Ve a la pesta�a **Web** -> seccion **Environment variables**.
+     - Agrega cada clave y valor: GOOGLE_API_KEY, SECRET_KEY, WHATSAPP_VERIFY_TOKEN, WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID.
+   Opcion 2 (archivo .env):
+     - Copia el ejemplo: cp /home/<usuario>/Dermatologico/src/components/chatbot/.env.example /home/<usuario>/Dermatologico/src/components/chatbot/.env
+     - Edita el archivo con 
+ano o el editor del panel y completa los valores reales.
+     - Si usas esta opcion, aseg�rate de que el WSGI cargue las variables con python-dotenv o os.environ.
+
+6. Configurar la aplicacion web en PythonAnywhere
+   a. En la pesta�a **Web**, crea una nueva app (Flask -> Python 3.11).
+   b. Selecciona el virtualenv ~/.virtualenvs/skincenter que creaste.
+   c. Edita el archivo WSGI (en la parte superior hay un enlace al archivo /var/www/<usuario>_pythonanywhere_com_wsgi.py). Sustituye el contenido relevante por:
+      `python
+import os, sys
+project_path = '/home/<usuario>/Dermatologico'
+if project_path not in sys.path:
+    sys.path.insert(0, project_path)
+
+os.environ.setdefault('FLASK_ENV', 'production')
+# Descomenta la siguiente linea si dependes de .env local:
+# from dotenv import load_dotenv; load_dotenv(os.path.join(project_path, 'src', 'components', 'chatbot', '.env'))
+
+from src.components.chatbot.flask_app import app as application
+      `
+   d. Guarda el WSGI y regresa al panel Web.
+
+7. Configurar rutas estaticas (opcional por ahora)
+   - Si necesitas servir archivos estaticos, usa la seccion **Static files**. Para el chatbot API no es obligatorio.
+
+8. Recargar y probar
+   a. En la pesta�a **Web**, pulsa **Reload**.
+   b. Revisa los **Server logs** y **Error logs** para confirmar que las variables se cargaron y que no hay trazas de error.
+   c. Prueba el endpoint: desde la consola ejecuta
+      `ash
+      curl -X POST https://<usuario>.pythonanywhere.com/api/chat \
+           -H "Content-Type: application/json" \
+           -d '{"message": "Hola, necesito agendar una cita"}'
+      `
+      Deberias recibir un JSON con la respuesta del bot.
+
+9. Integracion con el sitio SkinCenter
+   a. Actualiza el frontend para apuntar a https://<usuario>.pythonanywhere.com/api/chat.
+   b. Cuando necesites habilitar CORS, agrega en lask_app.py la configuracion con Flask-Cors antes de subir los cambios.
+
+10. Webhook de WhatsApp (cuando tengas credenciales vigentes)
+   a. Expone la ruta https://<usuario>.pythonanywhere.com/webhook/whatsapp en Meta.
+   b. Usa el mismo WHATSAPP_VERIFY_TOKEN configurado en variables.
+   c. Verifica los logs para validar eventos entrantes y respuestas.
+
+11. Mantenimiento
+   - Cada vez que actualices el codigo, sube los cambios y ejecuta **Reload**.
+   - Si modificas dependencias, recuerda pip install -r ... dentro del entorno virtual.
+   - Controla logs periodicamente para asegurar que no haya errores ni variables faltantes.
+
+Notas finales
+   - Nunca guardes credenciales reales en el repositorio.
+   - Para pruebas con Google Gemini o Meta WhatsApp usa claves de desarrollo antes de pasar a produccion.
+   - Documenta en tu equipo cualquier configuracion adicional (por ejemplo, base de datos para historiales) antes de habilitar el bot a pacientes.

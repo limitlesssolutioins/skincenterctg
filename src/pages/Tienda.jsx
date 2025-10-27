@@ -9,30 +9,21 @@ import './tienda.css';
 
 const Tienda = () => {
   // State for filters
-  const [selectedLine, setSelectedLine] = useState('Todas');
+  const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [selectedBrand, setSelectedBrand] = useState('Todas');
-  const [price, setPrice] = useState(100);
 
   // State for modal
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Memoized values for performance
-  const productLines = useMemo(() => ['Todas', ...new Set(allProducts.map(p => p.line))], []);
   const productBrands = useMemo(() => ['Todas', ...new Set(allProducts.map(p => p.brand))], []);
-  const maxPrice = useMemo(() => Math.ceil(Math.max(...allProducts.map(p => p.price))), []);
-
-  // Set initial price to max price once calculated
-  useState(() => {
-    setPrice(maxPrice);
-  }, [maxPrice]);
 
   const filteredProducts = useMemo(() => allProducts.filter(product => {
-    const matchesLine = selectedLine === 'Todas' || product.line === selectedLine;
+    const matchesCategory = selectedCategory === 'Todas' || product.category === selectedCategory;
     const matchesBrand = selectedBrand === 'Todas' || product.brand === selectedBrand;
-    const matchesPrice = product.price <= price;
-    return matchesLine && matchesBrand && matchesPrice;
-  }), [selectedLine, selectedBrand, price]);
+    return matchesCategory && matchesBrand;
+  }), [selectedCategory, selectedBrand]);
 
   const handleQuickView = (product) => {
     setSelectedProduct(product);
@@ -48,21 +39,16 @@ const Tienda = () => {
     <>
       <div className="tienda-page">
         <div className="container">
-          <h1 className="page-title">Nuestra Tienda</h1>
         </div>
 
         <section className="tienda-content-section section-padding">
           <div className="tienda-layout">
             <Sidebar 
-              productLines={productLines}
-              selectedLine={selectedLine}
-              setSelectedLine={setSelectedLine}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
               productBrands={productBrands}
               selectedBrand={selectedBrand}
               setSelectedBrand={setSelectedBrand}
-              maxPrice={maxPrice}
-              price={price}
-              setPrice={setPrice}
             />
             <main className="product-grid-container">
               {filteredProducts.length > 0 ? (

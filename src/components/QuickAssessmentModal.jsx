@@ -3,11 +3,14 @@ import './quickAssessmentModal.css';
 
 const defaultFormState = (serviceName = '') => ({
   fullName: '',
+  identificationType: '',
+  identificationNumber: '',
   email: '',
   phone: '',
   preferredTreatment: serviceName,
   primaryGoal: '',
-  skinSensitivity: '',
+  hasMedicalOrder: 'no',
+  doctorName: '',
   details: '',
   consent: false,
 });
@@ -81,6 +84,36 @@ function QuickAssessmentModal({ isOpen, onClose, serviceName, category }) {
 
             <div className="assessment-form__group assessment-form__group--split">
               <div>
+                <label htmlFor="identificationType">Tipo de identificación</label>
+                <select
+                  id="identificationType"
+                  name="identificationType"
+                  value={formData.identificationType}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Selecciona un tipo</option>
+                  <option value="cc">Cédula de Ciudadanía</option>
+                  <option value="ce">Cédula de Extranjería</option>
+                  <option value="pasaporte">Pasaporte</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="identificationNumber">Número de identificación</label>
+                <input
+                  id="identificationNumber"
+                  name="identificationNumber"
+                  type="text"
+                  value={formData.identificationNumber}
+                  onChange={handleChange}
+                  required
+                  placeholder="Ingrese el número"
+                />
+              </div>
+            </div>
+
+            <div className="assessment-form__group assessment-form__group--split">
+              <div>
                 <label htmlFor="email">Correo electronico</label>
                 <input
                   id="email"
@@ -137,41 +170,45 @@ function QuickAssessmentModal({ isOpen, onClose, serviceName, category }) {
             </div>
 
             <fieldset className="assessment-form__group">
-              <legend>Como describirias la sensibilidad de tu piel?</legend>
+              <legend>¿Tiene orden médica para el tratamiento?</legend>
               <label>
                 <input
                   type="radio"
-                  name="skinSensitivity"
-                  value="baja"
-                  checked={formData.skinSensitivity === 'baja'}
+                  name="hasMedicalOrder"
+                  value="no"
+                  checked={formData.hasMedicalOrder === 'no'}
                   onChange={handleChange}
                   required
                 />
-                Baja
+                No
               </label>
               <label>
                 <input
                   type="radio"
-                  name="skinSensitivity"
-                  value="media"
-                  checked={formData.skinSensitivity === 'media'}
+                  name="hasMedicalOrder"
+                  value="yes"
+                  checked={formData.hasMedicalOrder === 'yes'}
                   onChange={handleChange}
                   required
                 />
-                Media
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="skinSensitivity"
-                  value="alta"
-                  checked={formData.skinSensitivity === 'alta'}
-                  onChange={handleChange}
-                  required
-                />
-                Alta
+                Sí
               </label>
             </fieldset>
+
+            {formData.hasMedicalOrder === 'yes' && (
+              <div className="assessment-form__group">
+                <label htmlFor="doctorName">Nombre del médico que ordena</label>
+                <input
+                  id="doctorName"
+                  name="doctorName"
+                  type="text"
+                  value={formData.doctorName}
+                  onChange={handleChange}
+                  required
+                  placeholder="Ingrese el nombre del médico"
+                />
+              </div>
+            )}
 
             <div className="assessment-form__group">
               <label htmlFor="details">Cuentanos mas sobre tu caso</label>

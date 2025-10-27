@@ -40,17 +40,20 @@
 
 /* Page Header Section */
 .page-header-section {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('/img/Banner_services_dermaestetic.jpg');
-    background-size: 200% 100%; /* Make the gradient wider than the element */
+    border-bottom: 1px solid var(--neutral-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.background-image {
+    background-size: stretch;
     background-position: center;
     padding: 100px 20px;
     text-align: center;
-    border-bottom: 1px solid var(--neutral-light);
     position: relative;
-    animation: gradientShift 15s ease infinite alternate; /* Apply the animation */
 }
 
-.page-header-section::before {
+.background-image::before {
     content: '';
     position: absolute;
     top: 0;
@@ -59,6 +62,11 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
     z-index: 1;
+}
+
+.background-image .container {
+    position: relative;
+    z-index: 2;
 }
 
 .page-header-section::after {
@@ -77,17 +85,17 @@
 .page-header-section .subtitle {
     font-family: var(--font-secondary);
     font-size: 2.5em;
-    color: #fff;
+    color: #f0f0f0;
     max-width: 800px;
     margin: 0 auto;
     font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
 }
 
 .page-header-section .author {
     font-family: var(--font-primary);
     font-size: 1.2em;
-    color: #fff;
+    color: #f0f0f0;
     margin-top: 1rem;
     text-align: center;
 }
@@ -97,6 +105,7 @@
     font-size: 2.5em;
     color: var(--primary-color);
     margin-bottom: 1.5em;
+    text-align: center;
 }
 
 /* Doctor Profile Section */
@@ -204,114 +213,13 @@
 .page-header-section .subtitle.animated-text {
     opacity: 0; /* Start hidden */
     animation: fadeInSlideUp 1s ease-out forwards;
-    animation-delay: 0.5s; /* Delay for the quote */
+    animation-delay: 0.5s; /* Faster delay for the quote */
 }
 
 .page-header-section .author.animated-author {
     opacity: 0; /* Start hidden */
     animation: fadeInSlideUp 1s ease-out forwards;
-    animation-delay: 1s; /* Delay for the author, after the quote */
-}
-.page-header-section {
-  position: relative;
-  background: radial-gradient(circle at top, rgba(18, 38, 63, 0.88), rgba(9, 19, 36, 0.95));
-  color: #fff;
-  overflow: hidden;
-  padding: 120px 0 100px;
-}
-
-.page-header-section .container {
-  position: relative;
-  z-index: 2;
-  max-width: 960px;
-}
-
-.subtitle.animated-text {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
-  line-height: 1.5;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.92);
-  position: relative;
-}
-
-.subtitle.animated-text::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.05);
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'%3E%3Cpath fill='white' d='M0 80Q65 100 130 90t130 0q65-13 130-6t130 6q65 1 130-12t130-1q65 13 130 32t130 19q65 0 130-16t130-13v147H0Z'/%3E%3C/svg%3E") center/cover;
-  animation: shimmer 6s ease-in-out infinite;
-  opacity: 0.6;
-}
-
-.author.animated-author {
-  margin-top: 24px;
-  font-size: 1rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-.author.animated-author::before {
-  content: '';
-  display: inline-block;
-  width: 40px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.4);
-  margin-right: 24px;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(30%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.handwriting-mask {
-  position: relative;
-  overflow: hidden;
-}
-
-.handwriting-mask svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.handwriting-path {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.95);
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 2400;
-  stroke-dashoffset: 2400;
-  animation: handwriting 5.5s ease forwards;
-}
-
-@keyframes handwriting {
-  0% {
-    stroke-dashoffset: 2400;
-  }
-  80% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    opacity: 0;
-  }
+    animation-delay: 1s; /* Faster delay for the author */
 }
 
 .particle-layer {

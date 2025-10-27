@@ -1,7 +1,18 @@
 ﻿/* ServiciosDermatologicos (Treatments) Page Styles */
+.service-image {
+    width: 250px; /* Ancho fijo para todas las imágenes */
+    height: 200px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
 .servicios-page {
     padding-top: 50px;
+}
+
+.page-title {
+    text-align: center;
 }
 
 .page-subtitle {
@@ -67,17 +78,18 @@
 .service-block {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px; /* Reducida la separación */
     gap: 30px;
-}
-
-.service-block--reverse {
-    flex-direction: row-reverse;
+    background-color: #fff; /* Fondo blanco para el bloque */
+    border: 1px solid #eee; /* Borde suave */
+    border-radius: 12px; /* Bordes redondeados */
+    padding: 30px; /* Espaciado interno */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); /* Sombra sutil */
 }
 
 .service-image-container {
-    flex: 1;
-    min-width: 300px;
+    flex: 0 0 250px; /* Ancho fijo reducido para la imagen */
+    min-width: 250px;
 }
 
 .service-image {
@@ -85,6 +97,19 @@
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.service-block--reverse {
+    flex-direction: row-reverse;
+}
+
+.service-image-container {
+    width: 250px; /* Ancho fijo para el contenedor de la imagen */
+    height: 200px; /* Altura fija para el contenedor de la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
 }
 
 .service-text-container {

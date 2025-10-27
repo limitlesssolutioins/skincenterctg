@@ -97,6 +97,7 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  align-items: center;
 }
 
 .metric-label {

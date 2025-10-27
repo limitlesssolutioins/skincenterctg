@@ -82,3 +82,31 @@ input[type="range"]:hover::-webkit-slider-thumb {
 input[type="range"]:hover::-moz-range-thumb {
     background-color: var(--accent-color);
 }
+
+.category-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-buttons button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-primary);
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.category-buttons button:hover {
+    background-color: #e0e0e0;
+}
+
+.category-buttons button.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}

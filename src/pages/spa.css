@@ -123,6 +123,7 @@ body.spa-layout-mounted .spa-nav {
   gap: 16px;
   overflow-x: auto;
   padding: 16px 0;
+  justify-content: center; /* Center the buttons */
 }
 
 .spa-nav__link {
@@ -137,6 +138,7 @@ body.spa-layout-mounted .spa-nav {
   text-decoration: none;
   border: 1px solid transparent;
   transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  align-items: center; /* Center the text within the buttons */
 }
 
 .spa-nav__link:hover {
@@ -210,46 +212,47 @@ body.spa-layout-mounted .spa-nav {
   }
 
   .spa-hero__content {
-    padding: 16vh 0 14vh;
+    padding: 16vh 20px 14vh; /* Add horizontal padding for mobile */
   }
 
   .spa-hero__actions {
-    grid-auto-flow: column;
-    grid-template-columns: repeat(4, minmax(220px, 1fr));
-    overflow-x: auto;
+    grid-template-columns: 1fr; /* Single column layout */
+    grid-auto-flow: unset; /* Remove column flow */
+    overflow-x: unset; /* Remove horizontal scroll */
     gap: 14px;
     padding-bottom: 12px;
-    scrollbar-width: thin;
+    /* scrollbar-width: thin; */ /* Not needed with no overflow */
   }
 
   .spa-hero__card {
-    min-width: 220px;
+    min-width: unset; /* Allow card to take full width */
   }
 
   .spa-nav__inner {
     padding: 12px 0;
+    display: grid; /* Use grid for 2x2 layout */
+    grid-template-columns: repeat(2, 1fr); /* Two columns, equal width */
+    gap: 16px; /* Maintain spacing */
+    overflow-x: hidden; /* No horizontal scroll */
+    justify-content: unset; /* Reset justify-content */
   }
 
   .spa-nav__link {
-    min-width: 160px;
+    min-width: unset; /* Remove min-width to allow grid to control width */
+    padding: 12px 16px; /* Adjust padding for better fit */
   }
 
   .spa-section__intro {
     margin-bottom: 32px;
   }
+
+  .spa-outlet {
+    padding: 40px 20px; /* Add horizontal padding for mobile */
+  }
 }
 
 @media (max-width: 576px) {
-  .spa-hero__content h1 {
-    font-size: 2.4rem;
-  }
-
-  .spa-hero__lead {
-    font-size: 0.95rem;
-  }
-
   .spa-nav__link {
-    min-width: 140px;
     padding: 10px 14px;
   }
 }

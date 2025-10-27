@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files
+.env
+**/.env
+
+skincenterctg-221cb-67efb0d1f1c0.json 

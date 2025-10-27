@@ -3,26 +3,24 @@ import './sidebar.css';
 
 const Sidebar = (props) => {
   const {
-    productLines,
-    selectedLine,
-    setSelectedLine,
+    selectedCategory,
+    setSelectedCategory,
     productBrands,
     selectedBrand,
     setSelectedBrand,
-    maxPrice,
-    price, // Current price value for the slider
-    setPrice, // Function to update the price
   } = props;
 
   return (
     <aside className="filters-sidebar">
       <div className="filter-group">
-        <label htmlFor="line-filter">Línea de Producto:</label>
-        <select id="line-filter" value={selectedLine} onChange={(e) => setSelectedLine(e.target.value)}>
-          {productLines.map(line => (
-            <option key={line} value={line}>{line}</option>
-          ))}
-        </select>
+        <label>Categoría:</label>
+        <div className="category-buttons">
+          <button className={selectedCategory === 'Todas' ? 'active' : ''} onClick={() => setSelectedCategory('Todas')}>Todas</button>
+          <button className={selectedCategory === 'Rejuvenecimiento' ? 'active' : ''} onClick={() => setSelectedCategory('Rejuvenecimiento')}>Rejuvenecimiento</button>
+          <button className={selectedCategory === 'Antiacne' ? 'active' : ''} onClick={() => setSelectedCategory('Antiacne')}>Antiacné</button>
+          <button className={selectedCategory === 'Capilar' ? 'active' : ''} onClick={() => setSelectedCategory('Capilar')}>Capilar</button>
+          <button className={selectedCategory === 'Manchas' ? 'active' : ''} onClick={() => setSelectedCategory('Manchas')}>Manchas</button>
+        </div>
       </div>
 
       <div className="filter-group">
@@ -32,22 +30,6 @@ const Sidebar = (props) => {
             <option key={brand} value={brand}>{brand}</option>
           ))}
         </select>
-      </div>
-
-      <div className="filter-group">
-        <label htmlFor="price-filter">Precio (hasta):</label>
-        <div className="price-range-inputs">
-          <span>$0</span>
-          <span>${price}</span>
-        </div>
-        <input 
-          type="range" 
-          id="price-filter" 
-          min="0" 
-          max={maxPrice} 
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
       </div>
     </aside>
   );
