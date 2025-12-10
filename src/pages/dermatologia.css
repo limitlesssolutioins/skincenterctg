@@ -222,6 +222,11 @@
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
+    .page-title {
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+
     .page-subtitle {
         margin: 10px 20px 30px;
     }

@@ -9,19 +9,16 @@ function Footer() {
         <div className="footer-column">
           <h3>Clínica Dermatológica</h3>
           <p>Tu salud y belleza de la piel son nuestra prioridad. Ofrecemos tratamientos avanzados y personalizados para resultados excepcionales.</p>
-          <div className="social-links">
-            <a href="https://www.instagram.com/skincenter_oficial?igsh=MncyM2w4dWc3ajlo" aria-label="Instagram"><FaInstagram size={24} /></a>
-            <a href="https://www.facebook.com/share/1VCsvhNBdZ" aria-label="Facebook"><FaFacebookF size={24} /></a>
-            <a href="#" aria-label="LinkedIn"><FaLinkedinIn size={24} /></a>
-          </div>
+
         </div>
 
         <div className="footer-column">
           <h3>Contacto</h3>
           <div className="contact-details-horizontal">
-            <p><FaMapMarkerAlt /> Urb. Providencia, Dg. 32 #71-53, Cartagena, Colombia</p>
-            <p><FaPhone /> +57 (605) 441 8956</p>
-            <p><FaEnvelope /> consulta@skincenterdc.com</p>
+            <p><FaPhone /> +57 (304) 204 9249</p>
+            <p><FaPhone /> +57 (301) 441 8956</p>
+            <p><FaEnvelope /> skincenterdc@hotmail.com</p>
+            <p><FaMapMarkerAlt />Urb. Providencia, Dg. 32 #71-53, Cartagena, Colombia</p>
           </div>
         </div>
 

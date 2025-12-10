@@ -1,54 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './dermatologia.css';
-
-const tratamientosMedicosData = [
-  {
-    id: 1,
-    title: 'Consulta Dermatologica',
-    description: 'Evaluacion medica integral para el diagnostico y tratamiento de enfermedades de la piel, pelo y unas con un plan de manejo personalizado.',
-    image: '/img/oficinadra.png',
-  },
-  {
-    id: 2,
-    title: 'Control Dermatologico',
-    description: 'Seguimiento riguroso de los tratamientos prescritos para asegurar su eficacia, ajustar dosis y monitorear la evolucion de las condiciones cutaneas.',
-    image: '/img/equipo2.png',
-  },
-  {
-    id: 3,
-    title: 'Reseccion de Lesiones Cutaneas',
-    description: 'Extirpacion quirurgica de lesiones benignas o malignas con tecnicas precisas, según el tipo y localización de la lesión, obteniendo resultados funcionales y esteticos.',
-    image: '/img/lesionescutaneas.png',
-  },
-  {
-    id: 4,
-    title: 'Infiltracion Medica',
-    description: 'Aplicacion directa de medicamentos en la piel para tratar condiciones como alopecia areata, cicatrices queloides o procesos inflamatorios.',
-    image: '/img/infiltraciones.png',
-  },
-  {
-    id: 5,
-    title: 'Biopsia de Piel',
-    description: 'Procedimiento diagnostico que permite confirmar condiciones complejas mediante analisis histopatologico.',
-    image: '/img/biopsia.png',
-  },
-];
+import TreatmentDetailModal from '../components/TreatmentDetailModal';
+import { useServices } from '../firebase/useServices';
 
 const tecnologiaClinica = [
   {
     id: 1,
-    name: 'Dermatoscopia Digital',
-    description: 'Analisis de lesiones pigmentadas con imagenes de alta resolucion para un diagnostico temprano y preciso.',
+    name: 'Dermatoscopia digital',
+    description: 'Análisis de lesiones pigmentadas con imágenes de alta resolución para un diagnóstico temprano y preciso.',
   },
   {
     id: 2,
-    name: 'Laboratorio de Patologia',
-    description: 'Interpretacion histologica especializada que respalda decisiones terapeuticas seguras.',
+    name: 'Laboratorio de patología',
+    description: 'Interpretación histológica especializada que respalda decisiones terapéuticas seguras.',
   },
   {
     id: 3,
-    name: 'Laser de Colorante Pulsado',
-    description: 'Tecnologia especifica para lesiones vasculares y marcas post inflamatorias con tiempos cortos de recuperacion.',
+    name: 'Láser de colorante pulsado',
+    description: 'Tecnología específica para lesiones vasculares y marcas postinflamatorias con tiempos cortos de recuperación.',
   },
 ];
 
@@ -60,40 +29,44 @@ const ServiceBlock = ({ service, onLearnMore }) => (
     <div className="service-text-container">
       <h2>{service.title}</h2>
       <p>{service.description}</p>
-      <button type="button" className="learn-more-button" onClick={() => onLearnMore(service.title)}>
-        Saber mas
+      <button type="button" className="learn-more-button" onClick={() => onLearnMore(service)}>
+        Saber más
       </button>
     </div>
     <div className="service-image-container">
-      <img src={service.image} alt={service.title} className="service-image" />
+      <img src={service.image2} alt={service.title} className="service-image" />
     </div>
   </div>
 );
 
-const TechnologyCard = ({ item }) => (
-  <div className="technology-card">
-    <h3>{item.name}</h3>
-    <p>{item.description}</p>
-  </div>
-);
+function DermatologiaClinica() {
+  const [selectedTreatment, setSelectedTreatment] = useState(null);
+  const { services: tratamientosMedicosData, loading } = useServices('clinical');
 
-function DermatologiaClinica({ openModal }) {
-  const handleOpenModal = (serviceTitle) => {
-    openModal(serviceTitle, "Dermatologia Clinica");
+  const handleOpenModal = (service) => {
+    setSelectedTreatment(service);
   };
+
+  const handleCloseDetail = () => {
+    setSelectedTreatment(null);
+  };
+
+  if (loading) {
+     return <div className="servicios-page"><div className="container"><p>Cargando servicios...</p></div></div>;
+  }
 
   return (
     <div className="servicios-page">
       <div className="container">
-        <h1 className="page-title">Dermatologia Clinica</h1>
+        <h1 className="page-title">Dermatología clínica</h1>
         <p className="page-subtitle">
-          Diagnostico especializado y tratamientos avanzados respaldados por tecnologia de ultima generacion.
+          Diagnóstico especializado y tratamientos avanzados respaldados por tecnología de última generación.
         </p>
       </div>
 
       <section className="service-page-container section-padding">
         <div className="container">
-          {tratamientosMedicosData.map((service, index) => (
+          {tratamientosMedicosData.map((service) => (
             <ServiceBlock
               key={service.id}
               service={service}
@@ -103,16 +76,13 @@ function DermatologiaClinica({ openModal }) {
         </div>
       </section>
 
-      <section className="technology-highlight section-padding">
-        <div className="container">
-          <h2>Tecnologia al servicio de la piel</h2>
-          <div className="technology-grid">
-            {tecnologiaClinica.map((item) => (
-              <TechnologyCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {selectedTreatment && (
+        <TreatmentDetailModal
+          treatment={selectedTreatment}
+          category="Dermatología Clínica"
+          onClose={handleCloseDetail}
+        />
+      )}
     </div>
   );
 }

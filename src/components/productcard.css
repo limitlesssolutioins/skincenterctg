@@ -8,6 +8,7 @@
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative; /* Needed for overlay positioning */
+    height: 400px; /* Fixed height for consistency */
 }
 
 .product-card:hover {
@@ -18,14 +19,19 @@
 /* Image container for zoom effect and overlay */
 .product-image-container {
     position: relative;
-    overflow: hidden; /* Clips the zoom effect */
+    overflow: hidden;
+    width: 100%; /* Explicitly set width to 100% */
 }
 
 .product-image {
     width: 100%;
     height: 250px; /* Increased height for better visuals */
-    object-fit: cover;
+    background-size: cover;
+    background-position: center !important;
+    background-repeat: no-repeat;
     transition: transform 0.4s ease;
+    display: block;
+    margin: 0 auto;
 }
 
 .product-card:hover .product-image {
@@ -82,6 +88,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    max-height: 180px; /* Increased to make product names visible */
+    overflow: hidden;
 }
 
 .product-name {
@@ -90,6 +98,13 @@
     color: var(--primary-color);
     margin-bottom: 5px;
     font-weight: 600;
+    height: 3em; /* Limit to approximately 2 lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show only 2 lines */
+    -webkit-box-orient: vertical;
+    line-height: 1.5em; /* Adjust line height for better control */
 }
 
 .product-brand {
@@ -135,4 +150,10 @@
 .add-to-cart-btn:hover {
     background-color: var(--accent-color);
     color: var(--neutral-dark);
+}
+
+@media (max-width: 768px) {
+  .product-image {
+    height: 180px;
+  }
 }

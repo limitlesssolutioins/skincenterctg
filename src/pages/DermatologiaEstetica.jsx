@@ -1,56 +1,13 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import './dermatologia.css';
-
-const servicesData = [
-  {
-    id: 1,
-    title: 'Toxina Botulinica Avanzada',
-    description: 'Tratamiento para arrugas dinamicas en frente, entrecejo y contorno ocular con resultados naturales.',
-    image: '/img/toxina.png',
-  },
-  {
-    id: 2,
-    title: 'Rellenos con Acido Hialuronico',
-    description: 'Reposicion de volumen y definicion de contornos en labios, surcos, menton y pomezones.',
-    image: '/img/acidohialuronico.png',
-  },
-  {
-    id: 3,
-    title: 'Radiesse',
-    description: 'Bioestimulador que promueve la produccion de colageno para un efecto lifting progresivo.',
-    image: '/img/radiesse.png',
-  },
-  {
-    id: 4,
-    title: 'Harmonyca',
-    description: 'Tratamiento hibrido que combina relleno inmediato con estimulacion de colageno a largo plazo.',
-    image: '/img/harmonyca.png',
-  },
-  {
-    id: 5,
-    title: 'Skinbooster Facial',
-    description: 'Hidratacion profunda que mejora elasticidad, textura y luminosidad de la piel.',
-    image: '/img/skinbooster.png',
-  },
-  {
-    id: 6,
-    title: 'Hilos PDO',
-    description: 'Redensificacion y efecto tensor inmediato mediante hilos reabsorbibles lisos y espiculados.',
-    image: '/img/hilos.png',
-  },
-  {
-    id: 7,
-    title: 'Tratamientos con Microagujas',
-    description: 'Tecnologias como Radiofixer, Nanopore, Dermashine y Morpheus 8 para mejorar textura, arrugas y cicatrices.',
-    image: '/img/microagujas.png',
-  },
-];
+import TreatmentDetailModal from '../components/TreatmentDetailModal';
+import { useServices } from '../firebase/useServices';
 
 const tecnologiaEstetica = [
   {
     id: 1,
     name: 'Morpheus 8',
-    description: 'Sistema de radiofrecuencia fraccionada con microagujas para tensado y renovacion profunda.',
+    description: 'Sistema de radiofrecuencia fraccionada con microagujas para un tensado y renovación profunda.',
   },
   {
     id: 2,
@@ -59,8 +16,8 @@ const tecnologiaEstetica = [
   },
   {
     id: 3,
-    name: 'Luz Pulsada Intensa',
-    description: 'Tecnologia que mejora manchas, enrojecimiento y textura con minimos tiempos de recuperacion.',
+    name: 'Luz pulsada intensa',
+    description: 'Tecnología que mejora manchas, enrojecimiento y textura, con mínimos tiempos de recuperación.',
   },
 ];
 
@@ -72,12 +29,12 @@ const ServiceBlock = ({ service, onLearnMore }) => (
     <div className="service-text-container">
       <h2>{service.title}</h2>
       <p>{service.description}</p>
-      <button type="button" className="learn-more-button" onClick={() => onLearnMore(service.title)}>
-        Saber mas
+      <button type="button" className="learn-more-button" onClick={() => onLearnMore(service)}>
+        Saber más
       </button>
     </div>
     <div className="service-image-container">
-      <img src={service.image} alt={service.title} className="service-image" />
+      <img src={service.image2} alt={service.title} className="service-image" />
     </div>
   </div>
 );
@@ -89,23 +46,34 @@ const TechnologyCard = ({ item }) => (
   </div>
 );
 
-function DermatologiaEstetica({ openModal }) {
-  const handleOpenModal = (serviceTitle) => {
-    openModal(serviceTitle, "Dermatologia Estetica");
+function DermatologiaEstetica() {
+  const [selectedTreatment, setSelectedTreatment] = useState(null);
+  const { services: servicesData, loading } = useServices('aesthetic');
+
+  const handleOpenModal = (service) => {
+    setSelectedTreatment(service);
   };
+
+  const handleCloseDetail = () => {
+    setSelectedTreatment(null);
+  };
+
+  if (loading) {
+    return <div className="servicios-page"><div className="container"><p>Cargando servicios...</p></div></div>;
+  }
 
   return (
     <div className="servicios-page">
       <div className="container">
-        <h1 className="page-title">Dermatologia Estetica</h1>
+        <h1 className="page-title">Dermatología estética</h1>
         <p className="page-subtitle">
-          Protocolos personalizados para realzar rasgos, recuperar volumen y revitalizar la piel con resultados naturales.
+          En SkinCenter, combinamos ciencia y arte para realzar tu belleza natural. Ofrecemos tratamientos de dermatología estética personalizados, desde rejuvenecimiento facial hasta manejo de manchas y acné, con tecnologías avanzadas y un enfoque en resultados seguros y armoniosos. Nuestra prioridad es tu bienestar y la salud de tu piel.
         </p>
       </div>
 
       <section className="service-page-container section-padding">
         <div className="container">
-          {servicesData.map((service, index) => (
+          {servicesData.map((service) => (
             <ServiceBlock
               key={service.id}
               service={service}
@@ -115,16 +83,13 @@ function DermatologiaEstetica({ openModal }) {
         </div>
       </section>
 
-      <section className="technology-highlight section-padding">
-        <div className="container">
-          <h2>Equipamiento exclusivo</h2>
-          <div className="technology-grid">
-            {tecnologiaEstetica.map((item) => (
-              <TechnologyCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {selectedTreatment && (
+        <TreatmentDetailModal
+          treatment={selectedTreatment}
+          category="Dermatología Estética"
+          onClose={handleCloseDetail}
+        />
+      )}
     </div>
   );
 }

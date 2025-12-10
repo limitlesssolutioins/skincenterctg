@@ -4,11 +4,11 @@ import { Timeline } from "../components/Timeline";
 
 const timelineEvents = [
   {
-    year: "Nuestra Misión",
+    year: "Misión",
     text: "Ser una empresa dedicada a la prestación de servicios médicos generales y especializados, brindando una excelente atención a nuestros usuarios, para lo cual contamos con recurso humano idóneo y capacitado, tecnología avanzada, excelente infraestructura y procesos de calidad que conllevan a la mejora continua.",
   },
   {
-    year: "Nuestra Visión",
+    year: "Visión",
     text: "Para el 2028, proyectamos ser una empresa reconocida a nivel regional y nacional por la calidad y eficiencia en la prestación de los servicios médicos y especializados, caracterizada por el compromiso y competencia del talento humano y la disponibilidad de herramientas necesarias para lograr la satisfacción de nuestros pacientes.",
   },
   {
@@ -16,7 +16,7 @@ const timelineEvents = [
     text: "Liderado por nuestra Dermatóloga Dra. Diana Carolina Carrasquilla Ruiz, profesional con alta experiencia, en actualización permanente y excelente reconocimiento a nivel nacional. Especialidades: Dermatología clínica, cosmética, cirugía dermatológica y terapias láser.",
   },
   {
-    year: "Nuestros Valores",
+    year: "Valores",
     text: "- Pensamos en los demás\n- Pasión y alegría\n- Humildad\n- Autonomía\n- Profesionalismo\n- Respeto",
   },
 ];
@@ -73,7 +73,7 @@ function Nosotros() {
 
       <section className="timeline-section section-padding">
         <div className="container">
-          <h2 className="text-center section-title">Nuestra Filosofía</h2>
+          <h2 className="text-center section-title">Filosofía</h2>
           <Timeline events={timelineEvents} />
         </div>
       </section>

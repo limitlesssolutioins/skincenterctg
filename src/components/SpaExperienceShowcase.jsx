@@ -91,32 +91,11 @@ const SpaExperienceShowcase = ({ experiences = [], categoryLabel, onOpenAssessme
                   <p className="spa-experience-card__category">{categoryLabel}</p>
                   <h3>{experience.title}</h3>
                   <p className="spa-experience-card__summary">{experience.shortDescription}</p>
-                  {experience.metrics && (
-                    <ul className="spa-experience-card__metrics">
-                      {experience.metrics.map((metric) => (
-                        <li key={metric.label}>
-                          <span className="metric-label">{metric.label}</span>
-                          <span className="metric-value">{metric.value}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  {/* The metrics section has been removed from the card view */}
                 </div>
               </div>
 
-              {experience.highlights && experience.highlights.length > 0 && (
-                <div className="spa-experience-card__face spa-experience-card__face--back">
-                  <div className="spa-experience-card__back-content">
-                    <h4>Incluye</h4>
-                    <ul>
-                      {experience.highlights.map((highlight) => (
-                        <li key={highlight}>{highlight}</li>
-                      ))}
-                    </ul>
-                    <span className="spa-experience-card__hint">Toca para descubrir la experiencia completa</span>
-                  </div>
-                </div>
-              )}
+              {/* The back face of the card has been removed to simplify the view */}
             </button>
           );
         })}
@@ -136,6 +115,23 @@ const SpaExperienceShowcase = ({ experiences = [], categoryLabel, onOpenAssessme
             </div>
 
             <div className="spa-experience-detail__grid">
+              {activeExperience.highlights && activeExperience.highlights.length > 0 && (
+                <div className="spa-experience-detail__panel">
+                  <h3>Incluye</h3>
+                  <ul>
+                    {activeExperience.highlights.map((highlight, index) => {
+                      if (!highlight || highlight.trim() === '' || highlight.trim() === '---') {
+                        return null; // Skip empty or separator lines
+                      }
+                      if (highlight.startsWith('SUBHEADING:')) {
+                        return <h4 key={index} className="spa-highlight-subheading">{highlight.substring(11)}</h4>; // Render as subheading
+                      }
+                      return <li key={index}>{highlight}</li>; // Render as regular list item
+                    })}
+                  </ul>
+                </div>
+              )}
+
               {activeExperience.technology && activeExperience.technology.length > 0 && (
                 <div className="spa-experience-detail__panel">
                   <h3>Tecnologia protagonista</h3>

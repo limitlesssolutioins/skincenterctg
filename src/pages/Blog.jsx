@@ -1,13 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { db } from '../firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import './blog.css';
-
-// Blog data array
-const blogPosts = [
-  { id: 1, title: 'Los Beneficios del Ácido Hialurónico', date: '15 de Julio, 2025', image: '/img/blog_post1.webp', excerpt: 'El ácido hialurónico es una sustancia natural que se encuentra en nuestro cuerpo, especialmente en la piel, articulaciones y ojos. Su principal función es retener agua, lo que lo convierte en un hidratante excepcional. En dermatología, se utiliza ampliamente para mejorar la elasticidad de la piel, reducir arrugas y líneas de expresión, y proporcionar un aspecto más joven y saludable. Descubre cómo este poderoso ingrediente puede transformar la hidratación y elasticidad de tu piel, aportando volumen y disminuyendo los signos del envejecimiento de manera natural y efectiva.' },
-  { id: 2, title: 'Protección Solar: Más Allá del Verano', date: '10 de Julio, 2025', image: '/img/blog_post2.webp', excerpt: 'La protección solar es fundamental durante todo el año, no solo en verano. Los rayos UV están presentes incluso en días nublados y pueden causar daño acumulativo en la piel, llevando a envejecimiento prematuro, manchas y un mayor riesgo de cáncer de piel. Es crucial incorporar un protector solar de amplio espectro con un SPF de 30 o más en tu rutina diaria, aplicándolo generosamente y reaplicándolo cada pocas horas, especialmente si estás al aire libre. Aprende la importancia de usar protector solar todos los días, sin importar la estación del año, para mantener tu piel sana y protegida.' },
-  { id: 3, title: 'Mitos y Verdades sobre el Acné Adulto', date: '05 de Julio, 2025', image: '/img/blog_post3.webp', excerpt: 'El acné no es solo un problema adolescente; muchas personas experimentan brotes en la edad adulta, a menudo debido a factores hormonales, estrés o productos inadecuados. Desmentimos creencias populares como que el chocolate causa acné o que solo afecta a pieles grasas. Exploramos las verdaderas causas del acné adulto y te ofrecemos soluciones efectivas, desde tratamientos tópicos y orales hasta cambios en el estilo de vida y rutinas de cuidado de la piel personalizadas. Descubre cómo manejar y prevenir el acné para lograr una piel clara y saludable.' },
-];
 
 // Reusable Blog Post Card Component
 const BlogPostCard = ({ post }) => (
@@ -23,10 +18,36 @@ const BlogPostCard = ({ post }) => (
 );
 
 function Blog() {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "blog_posts"));
+        const postsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setBlogPosts(postsData);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+      }
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+     return <div className="blog-page"><div className="container"><p>Cargando artículos...</p></div></div>;
+  }
+
   return (
     <div className="blog-page">
       <div className="container">
-        <h1 className="page-title">Nuestro Blog</h1>
+        <h1 className="page-title">Blog</h1>
       </div>
 
       {/* Blog Posts Grid */}

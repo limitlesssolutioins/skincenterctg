@@ -61,6 +61,7 @@
 }
 
 .assessment-form {
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -178,3 +179,36 @@
     font-size: 1.5rem;
   }
 }
+.assessment-modal--embedded {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  max-height: none;
+}
+
+.assessment-modal--embedded .assessment-modal__header h2 {
+  font-size: 1.6rem;
+}
+
+.assessment-modal--embedded .assessment-modal__service {
+  font-size: 0.95rem;
+}
+
+.assessment-modal--embedded .assessment-form {
+  padding-bottom: 32px;
+}
+
+.assessment-modal--embedded .assessment-form__group--split {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.assessment-modal--embedded .assessment-modal__button {
+  width: 100%;
+}
+
+
+
+

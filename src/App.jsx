@@ -21,6 +21,18 @@ import SpaFacial from './pages/SpaFacial';
 import SpaCapilar from './pages/SpaCapilar';
 import SpaCorporal from './pages/SpaCorporal';
 import SpaLaser from './pages/SpaLaser';
+import DataMigration from './pages/DataMigration';
+
+// Admin Imports
+import Login from './pages/admin/Login';
+import DashboardLayout from './components/admin/DashboardLayout';
+import DashboardHome from './pages/admin/DashboardHome';
+import ProductManager from './pages/admin/ProductManager';
+import ServiceManager from './pages/admin/ServiceManager';
+import BlogManager from './pages/admin/BlogManager';
+import TeamManager from './pages/admin/TeamManager';
+import AdminRoute from './components/admin/AdminRoute';
+import { AuthProvider } from './firebase/AuthContext';
 
 import "./styles/global.css";
 
@@ -45,10 +57,14 @@ function App() {
   // Determine if the current route is the shop page
   const isShopPage = location.pathname.startsWith('/tienda');
 
+  // Determine if the current route is an admin page (to hide navbar/footer)
+  const isAdminPage = location.pathname.startsWith('/admin');
+
   return (
-    <div className="app">
-        <Navbar openModal={openModal} />
-        <main className="content">
+    <AuthProvider>
+      <div className="app">
+        {!isAdminPage && <Navbar openModal={openModal} />}
+        <main className={!isAdminPage ? "content" : ""}>
           <Routes>
             <Route path="/" element={<Home openModal={openModal} />} />
             <Route path="/nosotros" element={<Nosotros />} />
@@ -72,20 +88,33 @@ function App() {
             <Route path="/tienda/capilar" element={<Capilar />} />
             <Route path="/tienda/anti-acne" element={<AntiAcne />} />
             <Route path="/tienda/antimanchas" element={<Antimanchas />} />
+            <Route path="/migration" element={<DataMigration />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin" element={<AdminRoute><DashboardLayout /></AdminRoute>}>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<DashboardHome />} />
+              <Route path="products" element={<ProductManager />} />
+              <Route path="services" element={<ServiceManager />} />
+              <Route path="blog" element={<BlogManager />} />
+              <Route path="team" element={<TeamManager />} />
+            </Route>
           </Routes>
         </main>
-        <Footer />
-        <SocialWidgets facebook="#" instagram="#" twitter="#" />
-        <QuickAssessmentModal 
+        {!isAdminPage && <Footer />}
+        {!isAdminPage && <SocialWidgets facebook="#" instagram="#" twitter="#" />}
+        {!isAdminPage && <QuickAssessmentModal 
           isOpen={modalData.isOpen} 
           onClose={closeModal} 
           serviceName={modalData.serviceName} 
           category={modalData.category} 
-        />
-        {isShopPage && <CartWidget />} {/* Conditionally render CartWidget */}
-        <ChatbotWidget />
-        <CookieConsent />
+        />}
+        {!isAdminPage && isShopPage && <CartWidget />}
+        {!isAdminPage && <ChatbotWidget />}
+        {!isAdminPage && <CookieConsent />}
       </div>
+    </AuthProvider>
   );
 }
 

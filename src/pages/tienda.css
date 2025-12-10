@@ -81,9 +81,10 @@
         font-size: 2em;
     }
     .tienda-content-section {
-        padding: 40px 15px;
+        padding: 40px 20px; /* Increased horizontal padding */
     }
     .product-grid {
         grid-template-columns: 1fr;
+        justify-items: center; /* Center cards in single column layout */
     }
 }

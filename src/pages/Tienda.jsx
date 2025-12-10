@@ -1,13 +1,15 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { db } from '../firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
-import Sidebar from '../components/Sidebar'; // Import the new sidebar
-import { allProducts } from '../data/products.js';
+import Sidebar from '../components/Sidebar';
 import './tienda.css';
 
-// Dummy comment to force re-compilation.
-
 const Tienda = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   // State for filters
   const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [selectedBrand, setSelectedBrand] = useState('Todas');
@@ -16,14 +18,33 @@ const Tienda = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Memoized values for performance
-  const productBrands = useMemo(() => ['Todas', ...new Set(allProducts.map(p => p.brand))], []);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        const productsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+      setLoading(false);
+    };
 
-  const filteredProducts = useMemo(() => allProducts.filter(product => {
+    fetchProducts();
+  }, []);
+
+  // Memoized values for performance
+  const productBrands = useMemo(() => ['Todas', ...new Set(products.map(p => p.brand))], [products]);
+
+  const filteredProducts = useMemo(() => products.filter(product => {
     const matchesCategory = selectedCategory === 'Todas' || product.category === selectedCategory;
     const matchesBrand = selectedBrand === 'Todas' || product.brand === selectedBrand;
     return matchesCategory && matchesBrand;
-  }), [selectedCategory, selectedBrand]);
+  }), [selectedCategory, selectedBrand, products]);
 
   const handleQuickView = (product) => {
     setSelectedProduct(product);
@@ -34,6 +55,14 @@ const Tienda = () => {
     setIsModalOpen(false);
     setSelectedProduct(null);
   };
+
+  if (loading) {
+    return (
+      <div className="tienda-page" style={{ minHeight: '60vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <p>Cargando productos...</p>
+      </div>
+    );
+  }
 
   return (
     <>

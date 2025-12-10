@@ -13,7 +13,7 @@ const ProductCard = ({ product, onQuickViewClick }) => {
   return (
     <div className="product-card" onClick={() => onQuickViewClick(product)}>
       <div className="product-image-container">
-        <img src={product.image} alt={product.name} className="product-image" />
+        <div className="product-image" style={{ backgroundImage: `url(${product.image})` }} aria-label={product.name}></div>
         <div className="product-actions-overlay">
           <button className="quick-view-btn">
             Vista Rápida

@@ -165,9 +165,12 @@
         text-align: center;
     }
     .footer-column {
-        margin-bottom: 30px;
+        margin-bottom: 15px;
         border-right: none; /* Remove borders when stacked */
         padding-right: 0;
+    }
+    .contact-details-horizontal {
+        align-items: center;
     }
     .social-links, .newsletter-form, .payment-icons {
         justify-content: center;

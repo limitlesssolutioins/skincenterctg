@@ -20,7 +20,7 @@ function Home({ openModal }) {
       <TratamientosInteractivos />
 
       <Resenas />
-      <Tecnologias />
+      {/* <Tecnologias /> */}
       <ProductShowcase />
     </div>
   );

@@ -94,7 +94,7 @@ function Spa() {
       {/* Spa Categories Section */}
       <section className="spa-categories-section section-padding">
         <div className="container">
-          <h2 className="text-center section-title">Nuestros Espacios de Bienestar</h2>
+          <h2 className="text-center section-title">Espacios de Bienestar</h2>
           <div className="spa-categories-grid">
             {spaCategories.map(category => (
               <SpaCategoryCard key={category.id} category={category} />

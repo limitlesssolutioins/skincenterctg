@@ -34,11 +34,6 @@
     }
 }
 
-.nosotros-page {
-    padding-top: 50px; /* Adjust for fixed navbar height */
-}
-
-/* Page Header Section */
 .page-header-section {
     border-bottom: 1px solid var(--neutral-light);
     position: relative;

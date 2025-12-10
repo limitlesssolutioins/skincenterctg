@@ -12,10 +12,6 @@ const CartWidget = () => {
     setIsOpen(!isOpen);
   };
 
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
-  };
-
   const handleBuyClick = () => {
     if (cartItems.length === 0) {
       alert('Tu carrito está vacío.');
@@ -29,8 +25,7 @@ const CartWidget = () => {
       message += `- ${item.name} (x${item.quantity})\n`;
     });
 
-    message += `\nTotal estimado: $${calculateTotal()}\n\n`;
-    message += "Por favor, confírmame la disponibilidad y el proceso de pago.";
+    message += "\nPor favor, confírmame la disponibilidad y el proceso de pago.";
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
@@ -75,7 +70,7 @@ const CartWidget = () => {
                   <img src={item.image} alt={item.name} className="cart-item-image" />
                   <div className="cart-item-details">
                     <h4>{item.name}</h4>
-                    <p>${item.price.toFixed(2)} x {item.quantity}</p>
+                    <p>x {item.quantity}</p>
                   </div>
                   <div className="cart-item-actions">
                     <button onClick={() => removeFromCart(item.name)}><FaMinusCircle /></button>
@@ -89,7 +84,6 @@ const CartWidget = () => {
           </div>
           {cartItems.length > 0 && (
             <div className="cart-footer">
-              <div className="cart-total">Total: ${calculateTotal()}</div>
               <button className="buy-now-button" onClick={handleBuyClick}>Comprar por WhatsApp</button>
               <button className="clear-cart-button" onClick={clearCart}>Vaciar Carrito</button>
             </div>
